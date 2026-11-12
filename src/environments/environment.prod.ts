@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://music-api-fg9c.onrender.com/api',
+    apiUrl: 'https://medivoice-ai-mquo.onrender.com/api',
 };
