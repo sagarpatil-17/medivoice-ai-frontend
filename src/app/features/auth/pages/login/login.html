@@ -1,0 +1,219 @@
+<div class="min-h-screen bg-slate-50 flex">
+
+    <!-- Left branding panel -->
+    <section class="hidden lg:flex lg:w-1/2 relative overflow-hidden
+           bg-gradient-to-br from-teal-950 via-teal-900 to-emerald-900
+           text-white flex-col justify-between p-12 xl:p-16">
+
+        <div class="absolute -top-32 -right-32 h-96 w-96 rounded-full
+                bg-emerald-400/10 blur-3xl"></div>
+
+        <div class="absolute -bottom-32 -left-32 h-96 w-96 rounded-full
+                bg-teal-400/10 blur-3xl"></div>
+
+        <div class="relative z-10">
+            <div class="flex items-center gap-3">
+                <div class="flex h-12 w-12 items-center justify-center
+                    rounded-2xl bg-emerald-400 text-teal-950
+                    text-2xl font-bold">
+                    M
+                </div>
+
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">
+                        MediVoice AI
+                    </h1>
+                    <p class="text-xs text-teal-200">
+                        Intelligent Healthcare Assistant
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative z-10 max-w-xl">
+            <span class="inline-flex items-center gap-2 rounded-full
+                   border border-emerald-300/20 bg-emerald-300/10
+                   px-4 py-2 text-sm text-emerald-200">
+                <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                Smart Hospital Management
+            </span>
+
+            <h2 class="mt-8 text-4xl font-bold leading-tight xl:text-5xl">
+                Smarter conversations.
+                <span class="text-emerald-300">
+                    Better healthcare.
+                </span>
+            </h2>
+
+            <p class="mt-6 max-w-lg text-lg leading-8 text-teal-100/80">
+                Manage patients, appointments, doctors, and AI-powered
+                voice interactions from one intelligent platform.
+            </p>
+
+            <div class="mt-12 grid grid-cols-2 gap-4">
+
+                <div class="rounded-2xl border border-white/10
+                    bg-white/5 p-5 backdrop-blur-sm">
+                    <div class="text-2xl">🎙️</div>
+                    <h3 class="mt-3 font-semibold tracking-widest">AI Voice Assistant</h3>
+                    <p class="mt-1 text-sm text-teal-100/70">
+                        Intelligent patient conversations
+                    </p>
+                </div>
+
+                <div class="rounded-2xl border border-white/10
+                    bg-white/5 p-5 backdrop-blur-sm">
+                    <div class="text-2xl">📅</div>
+                    <h3 class="mt-3 font-semibold tracking-widest">Smart Appointments</h3>
+                    <p class="mt-1 text-sm text-teal-100/70">
+                        Simplified appointment management
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="relative z-10 text-sm text-teal-200/60">
+            Your Intelligent Voice Assistant for Healthcare.
+        </div>
+    </section>
+
+    <!-- Right login panel -->
+    <section class="flex w-full items-center justify-center px-5 py-10
+                  sm:px-8 lg:w-1/2">
+
+        <div class="w-full max-w-md">
+
+            <!-- Mobile branding -->
+            <div class="mb-10 flex items-center gap-3 lg:hidden">
+                <div class="flex h-11 w-11 items-center justify-center
+                    rounded-xl bg-teal-800 text-xl font-bold text-white">
+                    M
+                </div>
+
+                <div>
+                    <h1 class="text-xl font-bold text-slate-900">
+                        MediVoice AI
+                    </h1>
+                    <p class="text-xs text-slate-500">
+                        Intelligent Healthcare Assistant
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-widest
+                  text-teal-700">
+                    Welcome Back
+                </p>
+
+                <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900">
+                    Sign in to your account
+                </h2>
+
+                <p class="mt-3 text-sm leading-6 text-slate-500">
+                    Enter your credentials to access the MediVoice AI dashboard.
+                </p>
+            </div>
+
+            <!-- Error message -->
+            @if (errorMessage()) {
+            <div class="mt-6 flex items-start gap-3 rounded-xl
+                    border border-red-200 bg-red-50 p-4 text-sm text-red-700" role="alert">
+                <span class="font-bold">!</span>
+                <p>{{ errorMessage() }}</p>
+            </div>
+            }
+
+            <!-- Login form -->
+            <form [formGroup]="loginForm" (ngSubmit)="submit()" class="mt-8 space-y-6">
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">
+                        Email address
+                    </label>
+
+                    <input id="email" type="email" formControlName="email" autocomplete="username"
+                        placeholder="admin@medivoice.ai" class="w-full rounded-xl border border-slate-200 bg-white
+                   px-4 py-3.5 text-sm text-slate-900 outline-none
+                   transition placeholder:text-slate-400
+                   focus:border-teal-600 focus:ring-4
+                   focus:ring-teal-600/10" [class.border-red-400]="email.touched && email.invalid" />
+
+                    @if (email.touched && email.hasError('required')) {
+                    <p class="mt-2 text-xs text-red-600">
+                        Email address is required.
+                    </p>
+                    }
+
+                    @if (email.touched && email.hasError('email')) {
+                    <p class="mt-2 text-xs text-red-600">
+                        Please enter a valid email address.
+                    </p>
+                    }
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">
+                        Password
+                    </label>
+
+                    <div class="relative">
+                        <input id="password" [type]="showPassword() ? 'text' : 'password'" formControlName="password"
+                            autocomplete="current-password" placeholder="Enter your password" class="w-full rounded-xl border border-slate-200
+                     bg-white px-4 py-3.5 pr-20 text-sm
+                     text-slate-900 outline-none transition
+                     placeholder:text-slate-400
+                     focus:border-teal-600 focus:ring-4
+                     focus:ring-teal-600/10" [class.border-red-400]="password.touched && password.invalid" />
+
+                        <button type="button" (click)="togglePasswordVisibility()" class="absolute inset-y-0 right-4 text-xs
+                     font-semibold text-teal-700 hover:text-teal-900">
+                            {{ showPassword() ? 'Hide' : 'Show' }}
+                        </button>
+                    </div>
+
+                    @if (password.touched && password.hasError('required')) {
+                    <p class="mt-2 text-xs text-red-600">
+                        Password is required.
+                    </p>
+                    }
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" [disabled]="loading()" class="flex w-full items-center justify-center gap-3
+                 rounded-xl bg-teal-800 px-5 py-3.5
+                 text-sm font-semibold tracking-widest text-white shadow-lg
+                 shadow-teal-900/10 transition
+                 hover:bg-teal-900
+                 focus:outline-none focus:ring-4
+                 focus:ring-teal-600/20
+                 disabled:cursor-not-allowed disabled:opacity-60">
+
+                    @if (loading()) {
+                    <span class="h-5 w-5 animate-spin rounded-full
+                         border-2 border-white/30 border-t-white"></span>
+                    Signing in...
+                    } @else {
+                    Sign in
+                    <span aria-hidden="true">→</span>
+                    }
+                </button>
+            </form>
+
+            <!-- Security information -->
+            <div class="mt-8 flex items-center justify-center gap-2
+                  text-xs text-slate-500">
+                <span>🔒</span>
+                <span>Your connection is protected and secure.</span>
+            </div>
+
+            <p class="mt-12 text-center text-xs text-slate-400">
+                © {{ currentYear }} MediVoice AI. All rights reserved.
+            </p>
+
+        </div>
+    </section>
+</div>
