@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: '/api',
+    apiUrl: 'https://music-api-fg9c.onrender.com/api',
 };
