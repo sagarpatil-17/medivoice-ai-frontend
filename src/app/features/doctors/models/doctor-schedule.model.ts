@@ -28,3 +28,14 @@ export interface CreateDoctorScheduleRequest {
     breakEndTime?: string;
     isActive?: boolean;
 }
+
+export interface UpdateDoctorScheduleRequest {
+    doctorId?: string;
+    dayOfWeek?: number;
+    startTime?: string;
+    endTime?: string;
+    slotDurationMinutes?: number;
+    breakStartTime?: string | null;
+    breakEndTime?: string | null;
+    isActive?: boolean;
+}

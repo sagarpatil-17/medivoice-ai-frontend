@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import {
     CreateDoctorScheduleRequest,
     DoctorSchedule,
+    UpdateDoctorScheduleRequest,
 } from '../models/doctor-schedule.model';
 
 @Injectable({
@@ -31,6 +32,16 @@ export class DoctorSchedulesService {
         return this.http.patch<DoctorSchedule>(
             `${this.apiUrl}/${id}/deactivate`,
             {},
+        );
+    }
+
+    updateSchedule(
+        id: string,
+        payload: UpdateDoctorScheduleRequest,
+    ): Observable<DoctorSchedule> {
+        return this.http.patch<DoctorSchedule>(
+            `${this.apiUrl}/${id}`,
+            payload,
         );
     }
 }
