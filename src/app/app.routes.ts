@@ -67,6 +67,12 @@ export const routes: Routes = [
                                 .then(m => m.DoctorForm),
                     },
                     {
+                        path: ':id/edit',
+                        loadComponent: () =>
+                            import('./features/doctors/pages/doctor-form/doctor-form')
+                                .then(m => m.DoctorForm),
+                    },
+                    {
                         path: ':id',
                         loadComponent: () =>
                             import('./features/doctors/pages/doctor-details/doctor-details')

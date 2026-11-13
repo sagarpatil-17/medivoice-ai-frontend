@@ -27,7 +27,7 @@
             </h1>
         </div>
 
-        <a [routerLink]="['/doctors', doctorData.id, 'edit']"
+        <a [routerLink]="['/doctors', doctorData?.id, 'edit']"
             class="rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700">
             Edit Doctor
         </a>
@@ -39,27 +39,27 @@
 
             <div
                 class="flex h-20 w-20 items-center justify-center rounded-2xl bg-teal-100 text-2xl font-bold text-teal-800">
-                {{ getInitials(doctorData.fullName) }}
+                {{ getInitials(doctorData?.fullName) }}
             </div>
 
             <div class="min-w-0 flex-1">
                 <h2 class="text-xl font-bold text-slate-900">
-                    {{ doctorData.fullName }}
+                    {{ doctorData?.fullName }}
                 </h2>
 
                 <p class="mt-1 text-sm text-slate-500">
-                    {{ doctorData.specialization }}
+                    {{ doctorData?.specialization }}
                 </p>
 
                 <div class="mt-3 flex flex-wrap items-center gap-2">
                     <span class="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
-                        {{ doctorData.department.name }}
+                        {{ doctorData?.department.name }}
                     </span>
 
-                    <span class="rounded-full px-3 py-1 text-xs font-semibold" [ngClass]="doctorData.isActive
+                    <span class="rounded-full px-3 py-1 text-xs font-semibold" [ngClass]="doctorData?.isActive
                 ? 'bg-green-50 text-green-700'
                 : 'bg-slate-100 text-slate-600'">
-                        {{ doctorData.isActive ? 'Active' : 'Inactive' }}
+                        {{ doctorData?.isActive ? 'Active' : 'Inactive' }}
                     </span>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     Qualification
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.qualification }}
+                    {{ doctorData?.qualification }}
                 </p>
             </div>
 
@@ -88,7 +88,7 @@
                     Experience
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.experienceYears }} years
+                    {{ doctorData?.experienceYears }} years
                 </p>
             </div>
 
@@ -97,7 +97,7 @@
                     Consultation Fee
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.consultationFee | currency:'INR':'symbol':'1.0-2':'en-IN' }}
+                    {{ doctorData?.consultationFee | currency:'INR':'symbol':'1.0-2':'en-IN' }}
                 </p>
             </div>
 
@@ -106,7 +106,7 @@
                     Department
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.department.name }}
+                    {{ doctorData?.department.name }}
                 </p>
             </div>
 
@@ -115,19 +115,19 @@
                     Specialization
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.specialization }}
+                    {{ doctorData?.specialization }}
                 </p>
             </div>
 
         </div>
 
-        @if (doctorData.bio) {
+        @if (doctorData?.bio) {
         <div class="mt-6 border-t border-slate-100 pt-5">
             <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
                 Professional Bio
             </p>
             <p class="mt-2 whitespace-pre-line text-sm leading-6 text-slate-600">
-                {{ doctorData.bio }}
+                {{ doctorData?.bio }}
             </p>
         </div>
         }
@@ -146,7 +146,7 @@
                     Email
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.user.email }}
+                    {{ doctorData?.user.email }}
                 </p>
             </div>
 
@@ -155,7 +155,7 @@
                     Phone
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.user.phone || 'Not provided' }}
+                    {{ doctorData?.user.phone || 'Not provided' }}
                 </p>
             </div>
 
@@ -164,7 +164,7 @@
                     Account Status
                 </p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">
-                    {{ doctorData.user.isActive ? 'Active' : 'Inactive' }}
+                    {{ doctorData?.user.isActive ? 'Active' : 'Inactive' }}
                 </p>
             </div>
 

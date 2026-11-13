@@ -74,7 +74,7 @@ export class DashboardLayout {
     {
       label: 'Departments',
       path: '/departments',
-      icon: '▤',
+      icon: '▧',
       roles: ['ADMIN', 'RECEPTIONIST'],
     },
     // {

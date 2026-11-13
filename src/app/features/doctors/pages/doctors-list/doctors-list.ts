@@ -109,7 +109,7 @@ export class DoctorsList {
         return name
             .split(' ')
             .filter(Boolean)
-            .slice(0, 2)
+            .slice(1, 3)
             .map(part => part.charAt(0))
             .join('')
             .toUpperCase();

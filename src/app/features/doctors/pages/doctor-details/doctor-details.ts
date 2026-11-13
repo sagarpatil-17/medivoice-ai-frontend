@@ -18,7 +18,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-doctor-details',
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, RouterLink],
     templateUrl: './doctor-details.html',
 })
