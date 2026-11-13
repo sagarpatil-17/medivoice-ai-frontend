@@ -42,12 +42,12 @@ export const routes: Routes = [
                             import('./features/patients/pages/patient-form/patient-form')
                                 .then(m => m.PatientForm),
                     },
-                    // {
-                    //   path: ':id',
-                    //   loadComponent: () =>
-                    //     import('./features/patients/pages/patient-details/patient-details')
-                    //       .then(m => m.PatientDetails),
-                    // },
+                    {
+                        path: ':id',
+                        loadComponent: () =>
+                            import('./features/patients/pages/patient-details/patient-details')
+                                .then(m => m.PatientDetails),
+                    },
                 ],
             },
         ],
