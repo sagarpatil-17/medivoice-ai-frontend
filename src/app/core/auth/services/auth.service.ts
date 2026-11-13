@@ -60,10 +60,13 @@ export class AuthService {
                     tap((response) => {
                         this.accessTokenState.set(response.accessToken);
                     }),
+                    shareReplay({
+                        bufferSize: 1,
+                        refCount: false,
+                    }),
                     finalize(() => {
                         this.refreshRequest$ = null;
                     }),
-                    shareReplay(1),
                 );
         }
 

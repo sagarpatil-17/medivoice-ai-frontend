@@ -1,3 +1,4 @@
+
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
@@ -27,11 +28,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     return next(request).pipe(
         catchError((error) => {
-            if (
-                error.status !== 401 ||
-                isAuthEndpoint ||
-                !token
-            ) {
+            if (error.status !== 401 || isAuthEndpoint || !token) {
                 return throwError(() => error);
             }
 
