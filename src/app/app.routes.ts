@@ -116,8 +116,42 @@ export const routes: Routes = [
                             import('./features/calls/pages/call-details/call-details')
                                 .then(m => m.CallDetails),
                     },
+                    {
+                        path: 'analytics',
+                        loadComponent: () =>
+                            import(
+                                './features/calls/pages/calls-analytics/calls-analytics'
+                            ).then((m) => m.CallsAnalytics),
+                        canActivate: [roleGuard],
+                        data: {
+                            roles: ['ADMIN', 'RECEPTIONIST'],
+                        },
+                    },
                 ],
-            }
+            },
+            {
+                path: 'departments',
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () =>
+                            import('./features/departments/pages/departments-list/departments-list')
+                                .then((m) => m.DepartmentsList),
+                    },
+                    // {
+                    //     path: 'new',
+                    //     loadComponent: () =>
+                    //         import('./features/departments/pages/department-form/department-form')
+                    //             .then((m) => m.DepartmentForm),
+                    // },
+                    // {
+                    //     path: ':id/edit',
+                    //     loadComponent: () =>
+                    //         import('./features/departments/pages/department-form/department-form')
+                    //             .then((m) => m.DepartmentForm),
+                    // },
+                ],
+            },
         ],
     },
     {

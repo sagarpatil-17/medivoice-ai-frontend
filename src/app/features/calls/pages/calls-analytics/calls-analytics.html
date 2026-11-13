@@ -1,0 +1,300 @@
+<div class="space-y-6">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900">
+                Voice Call Analytics
+            </h1>
+            <p class="text-sm text-slate-500 mt-1">
+                Monitor your AI receptionist's call performance.
+            </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a routerLink="/calls"
+                class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                View all calls
+            </a>
+
+            <button type="button" (click)="loadAnalytics()" [disabled]="loading()"
+                class="px-4 py-2.5 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 disabled:opacity-50">
+                Refresh
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    @if (loading()) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        @for (item of [1, 2, 3, 4]; track item) {
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 animate-pulse">
+            <div class="h-4 w-28 bg-slate-200 rounded"></div>
+            <div class="h-8 w-20 bg-slate-200 rounded mt-4"></div>
+            <div class="h-3 w-32 bg-slate-100 rounded mt-3"></div>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- Error -->
+    @if (!loading() && errorMessage()) {
+    <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
+        <p class="text-sm text-rose-700">
+            {{ errorMessage() }}
+        </p>
+        <button type="button" (click)="loadAnalytics()" class="mt-3 text-sm font-semibold text-rose-700 underline">
+            Try again
+        </button>
+    </div>
+    }
+
+    @if (!loading() && overview(); as data) {
+
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-slate-500">Total calls</p>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2">
+                        {{ data.totalCalls }}
+                    </h2>
+                </div>
+                <div
+                    class="w-11 h-11 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center text-xl">
+                    <span>☎</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">
+                All recorded calls
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-slate-500">Completed calls</p>
+                    <h2 class="text-3xl font-bold text-emerald-600 mt-2">
+                        {{ data.completedCalls }}
+                    </h2>
+                </div>
+                <div
+                    class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl">
+                    <span>✓</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">
+                {{ completionRate() }}% of total calls
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-slate-500">Appointments booked</p>
+                    <h2 class="text-3xl font-bold text-blue-600 mt-2">
+                        {{ getOutcomeCount('APPOINTMENT_BOOKED') }}
+                    </h2>
+                </div>
+                <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl">
+                    <span>▣</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">
+                {{ successRate() }}% of total calls
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-slate-500">Average call duration</p>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2">
+                        {{ formatDuration(data.averageDurationSeconds) }}
+                    </h2>
+                </div>
+                <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+                    <span>◷</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">
+                Average recorded call length
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Call Status -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6">
+        <div class="mb-5">
+            <h2 class="text-lg font-bold text-slate-900">
+                Call status overview
+            </h2>
+            <p class="text-sm text-slate-500 mt-1">
+                Current call processing results.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <div class="rounded-xl bg-emerald-50 p-4">
+                <p class="text-sm text-emerald-700">Completed</p>
+                <p class="text-2xl font-bold text-emerald-800 mt-2">
+                    {{ data.completedCalls }}
+                </p>
+            </div>
+
+            <div class="rounded-xl bg-rose-50 p-4">
+                <p class="text-sm text-rose-700">Failed</p>
+                <p class="text-2xl font-bold text-rose-800 mt-2">
+                    {{ data.failedCalls }}
+                </p>
+            </div>
+
+            <div class="rounded-xl bg-amber-50 p-4">
+                <p class="text-sm text-amber-700">No answer</p>
+                <p class="text-2xl font-bold text-amber-800 mt-2">
+                    {{ data.noAnswerCalls }}
+                </p>
+            </div>
+
+            <div class="rounded-xl bg-blue-50 p-4">
+                <p class="text-sm text-blue-700">In progress</p>
+                <p class="text-2xl font-bold text-blue-800 mt-2">
+                    {{ data.inProgressCalls }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Outcomes -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <div>
+                <h2 class="text-lg font-bold text-slate-900">
+                    Call outcomes
+                </h2>
+                <p class="text-sm text-slate-500 mt-1">
+                    Breakdown of recorded call results.
+                </p>
+            </div>
+
+            @if (outcomeItems().length > 0) {
+            <div class="space-y-5 mt-6">
+                @for (item of outcomeItems(); track item.outcome) {
+                <div>
+                    <div class="flex justify-between gap-3 mb-2">
+                        <span class="text-sm font-medium text-slate-700">
+                            {{ item.label }}
+                        </span>
+                        <span class="text-sm font-semibold text-slate-900">
+                            {{ item.count }} ({{ item.percentage }}%)
+                        </span>
+                    </div>
+
+                    <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                        <div class="h-full rounded-full transition-all" [class]="item.color"
+                            [style.width.%]="item.percentage"></div>
+                    </div>
+                </div>
+                }
+            </div>
+            } @else {
+            <div class="py-12 text-center">
+                <p class="text-sm text-slate-400">
+                    No call outcome data available yet.
+                </p>
+            </div>
+            }
+        </div>
+
+        <!-- Performance -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <h2 class="text-lg font-bold text-slate-900">
+                AI receptionist performance
+            </h2>
+            <p class="text-sm text-slate-500 mt-1">
+                Key performance indicators.
+            </p>
+
+            <div class="space-y-6 mt-6">
+
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm font-medium text-slate-700">
+                            Call completion rate
+                        </span>
+                        <span class="text-sm font-bold text-slate-900">
+                            {{ completionRate() }}%
+                        </span>
+                    </div>
+                    <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-emerald-500 rounded-full" [style.width.%]="completionRate()"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm font-medium text-slate-700">
+                            Appointment booking rate
+                        </span>
+                        <span class="text-sm font-bold text-slate-900">
+                            {{ successRate() }}%
+                        </span>
+                    </div>
+                    <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-violet-500 rounded-full" [style.width.%]="successRate()"></div>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-100 pt-5">
+                    <div class="flex justify-between py-2">
+                        <span class="text-sm text-slate-500">
+                            Human transfers
+                        </span>
+                        <span class="text-sm font-semibold text-slate-900">
+                            {{ getOutcomeCount('HUMAN_TRANSFER') }}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between py-2">
+                        <span class="text-sm text-slate-500">
+                            FAQs resolved
+                        </span>
+                        <span class="text-sm font-semibold text-slate-900">
+                            {{ getOutcomeCount('FAQ_RESOLVED') }}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between py-2">
+                        <span class="text-sm text-slate-500">
+                            Unresolved calls
+                        </span>
+                        <span class="text-sm font-semibold text-slate-900">
+                            {{ getOutcomeCount('UNRESOLVED') }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <p class="text-xs text-slate-400">
+            Analytics are based on call records received from Vapi.
+        </p>
+
+        <a routerLink="/calls" class="text-sm font-semibold text-violet-600 hover:text-violet-700">
+            Explore call history →
+        </a>
+    </div>
+    }
+
+</div>

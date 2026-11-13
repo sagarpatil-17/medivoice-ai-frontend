@@ -66,23 +66,29 @@ export class DashboardLayout {
       roles: ['ADMIN', 'RECEPTIONIST'],
     },
     {
+      label: 'Call Analytics',
+      path: '/calls/analytics',
+      icon: '▤',
+      roles: ['ADMIN', 'RECEPTIONIST'],
+    },
+    {
       label: 'Departments',
       path: '/departments',
       icon: '▤',
       roles: ['ADMIN', 'RECEPTIONIST'],
     },
-    {
-      label: 'Staff management',
-      path: '/staff',
-      icon: '♧',
-      roles: ['ADMIN'],
-    },
-    {
-      label: 'Settings',
-      path: '/settings',
-      icon: '⚙',
-      roles: ['ADMIN'],
-    },
+    // {
+    //   label: 'Staff management',
+    //   path: '/staff',
+    //   icon: '♧',
+    //   roles: ['ADMIN'],
+    // },
+    // {
+    //   label: 'Settings',
+    //   path: '/settings',
+    //   icon: '⚙',
+    //   roles: ['ADMIN'],
+    // },
   ];
 
   readonly visibleNavigationItems = computed(() => {

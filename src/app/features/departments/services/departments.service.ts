@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import {
     Department,
+    DepartmentRequest,
     DepartmentsResponse,
 } from '../models/department.model';
 
@@ -33,5 +34,23 @@ export class DepartmentsService {
 
     getDepartment(id: string): Observable<Department> {
         return this.http.get<Department>(`${this.apiUrl}/${id}`);
+    }
+
+    createDepartment(payload: DepartmentRequest): Observable<Department> {
+        return this.http.post<Department>(this.apiUrl, payload);
+    }
+
+    updateDepartment(
+        id: string,
+        payload: Partial<DepartmentRequest>,
+    ): Observable<Department> {
+        return this.http.patch<Department>(`${this.apiUrl}/${id}`, payload);
+    }
+
+    deactivateDepartment(id: string): Observable<Department> {
+        return this.http.patch<Department>(
+            `${this.apiUrl}/${id}/deactivate`,
+            {},
+        );
     }
 }

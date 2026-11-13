@@ -18,3 +18,9 @@ export interface DepartmentsResponse {
         totalPages: number;
     };
 }
+
+export interface DepartmentRequest {
+    name: string;
+    code: string;
+    description?: string;
+}
