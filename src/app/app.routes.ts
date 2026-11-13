@@ -1,6 +1,7 @@
 
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth/guards/auth.guard';
+import { roleGuard } from './core/auth/guards/role.guard';
 
 export const routes: Routes = [
     {
@@ -73,6 +74,34 @@ export const routes: Routes = [
                     },
                 ],
             },
+            {
+                path: 'appointments',
+                canActivate: [authGuard, roleGuard],
+                data: {
+                    roles: ['ADMIN', 'RECEPTIONIST']
+                },
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () =>
+                            import('./features/appointments/pages/appointments-list/appointments-list')
+                                .then(m => m.AppointmentsList)
+                    },
+                    {
+                        path: 'new',
+                        loadComponent: () =>
+                            import('./features/appointments/pages/appointment-form/appointment-form')
+                                .then(m => m.AppointmentForm)
+                    },
+                    {
+                        path: ':id',
+                        loadComponent: () =>
+                            import('./features/appointments/pages/appointment-details/appointment-details')
+                                .then(m => m.AppointmentDetails)
+                    }
+                ]
+            }
+
         ],
     },
     {
