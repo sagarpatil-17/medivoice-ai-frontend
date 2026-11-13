@@ -1,0 +1,180 @@
+<div class="mx-auto max-w-5xl space-y-6">
+
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900">
+                {{ isEditMode ? 'Edit Doctor' : 'Add Doctor' }}
+            </h1>
+            <p class="mt-1 text-sm text-slate-500">
+                {{ isEditMode
+                ? 'Update doctor profile and professional information.'
+                : 'Add a new doctor to your hospital.' }}
+            </p>
+        </div>
+
+        <a routerLink="/doctors"
+            class="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+            Back to Doctors
+        </a>
+    </div>
+
+    @if (errorMessage()) {
+    <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ errorMessage() }}
+    </div>
+    }
+
+    @if (loading()) {
+    <div class="rounded-xl border border-slate-200 bg-white p-8 text-center text-slate-500">
+        Loading doctor details...
+    </div>
+    } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+
+        <!-- Personal information -->
+        <section class="rounded-xl border border-slate-200 bg-white p-6">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Personal Information
+            </h2>
+
+            <div class="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Full Name *
+                    </label>
+                    <input formControlName="fullName" type="text" placeholder="Dr. John Smith"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                    @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
+                    <p class="mt-1 text-xs text-red-600">Full name is required.</p>
+                    }
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Email *
+                    </label>
+                    <input formControlName="email" type="email" placeholder="doctor@hospital.com"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100 disabled:bg-slate-100" />
+                    @if (form.controls.email.touched && form.controls.email.invalid) {
+                    <p class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+                    }
+                </div>
+
+                @if (!isEditMode) {
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Login Password *
+                    </label>
+                    <input formControlName="password" type="password" placeholder="Minimum 8 characters"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                    @if (form.controls.password.touched && form.controls.password.invalid) {
+                    <p class="mt-1 text-xs text-red-600">
+                        Password must contain at least 8 characters.
+                    </p>
+                    }
+                </div>
+                }
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Phone Number
+                    </label>
+                    <input formControlName="phone" type="tel" placeholder="+919876543210"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Professional information -->
+        <section class="rounded-xl border border-slate-200 bg-white p-6">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Professional Information
+            </h2>
+
+            <div class="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Department *
+                    </label>
+                    <select formControlName="departmentId"
+                        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
+                        <option value="">Select department</option>
+                        @for (department of departments(); track department.id) {
+                        <option [value]="department.id">
+                            {{ department.name }}
+                        </option>
+                        }
+                    </select>
+                    @if (form.controls.departmentId.touched && form.controls.departmentId.invalid) {
+                    <p class="mt-1 text-xs text-red-600">Select a department.</p>
+                    }
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Specialization *
+                    </label>
+                    <input formControlName="specialization" type="text" placeholder="Cardiologist"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Qualification *
+                    </label>
+                    <input formControlName="qualification" type="text" placeholder="MBBS, MD"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Experience (Years) *
+                    </label>
+                    <input formControlName="experienceYears" type="number" min="0"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Consultation Fee (₹) *
+                    </label>
+
+                    <input formControlName="consultationFee" type="number" min="0" step="0.01" placeholder="500"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="mb-2 block text-sm font-medium text-slate-700">
+                        Professional Bio
+                    </label>
+                    <textarea formControlName="bio" rows="4" placeholder="Write a short professional biography..."
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100"></textarea>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Actions -->
+        <div class="flex justify-end gap-3">
+            <a routerLink="/doctors"
+                class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                Cancel
+            </a>
+
+            <button type="submit" [disabled]="saving() || departments().length === 0"
+                class="rounded-lg bg-teal-800 px-6 py-2.5 text-sm font-semibold text-white hover:bg-teal-900 disabled:cursor-not-allowed disabled:opacity-60">
+                {{ saving()
+                ? 'Saving...'
+                : isEditMode
+                ? 'Update Doctor'
+                : 'Create Doctor' }}
+            </button>
+        </div>
+
+    </form>
+    }
+</div>

@@ -50,6 +50,29 @@ export const routes: Routes = [
                     },
                 ],
             },
+            {
+                path: 'doctors',
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () =>
+                            import('./features/doctors/pages/doctors-list/doctors-list')
+                                .then(m => m.DoctorsList),
+                    },
+                    {
+                        path: 'new',
+                        loadComponent: () =>
+                            import('./features/doctors/pages/doctor-form/doctor-form')
+                                .then(m => m.DoctorForm),
+                    },
+                    {
+                        path: ':id',
+                        loadComponent: () =>
+                            import('./features/doctors/pages/doctor-details/doctor-details')
+                                .then(m => m.DoctorDetails),
+                    },
+                ],
+            },
         ],
     },
     {
