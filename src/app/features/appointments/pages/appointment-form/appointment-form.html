@@ -222,7 +222,7 @@
 
             <button type="submit"
                 [disabled]="saving() || loadingSlots() || loadingOptions() || patients().length === 0 || doctors().length === 0"
-                class="rounded-lg bg-teal-800 px-6 py-3 text-sm font-semibold text-white hover:bg-teal-900 disabled:cursor-not-allowed disabled:opacity-50">
+                class="rounded-lg bg-teal-600 px-6 py-3 text-sm font-semibold text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50">
                 {{ saving() ? 'Booking appointment...' : 'Confirm appointment' }}
             </button>
         </div>

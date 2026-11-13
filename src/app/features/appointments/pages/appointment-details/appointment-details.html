@@ -245,7 +245,7 @@
         <div class="mt-6 flex flex-wrap gap-3">
             <button type="button" (click)="rescheduleAppointment()"
                 [disabled]="!selectedStartAt() || saving() || loadingSlots()"
-                class="rounded-lg bg-teal-800 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-900 disabled:opacity-50">
+                class="rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-50">
                 {{ saving() ? 'Saving...' : 'Confirm reschedule' }}
             </button>
 

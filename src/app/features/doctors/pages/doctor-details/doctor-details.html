@@ -28,7 +28,7 @@
         </div>
 
         <a [routerLink]="['/doctors', doctorData.id, 'edit']"
-            class="rounded-lg bg-teal-800 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-900">
+            class="rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700">
             Edit Doctor
         </a>
     </div>
@@ -187,7 +187,7 @@
 
             @if (canManageSchedules()) {
             <button type="button" (click)="openAddSchedule()"
-                class="rounded-lg bg-teal-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-teal-900">
+                class="rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-teal-700">
                 + Add Schedule
             </button>
             }
@@ -288,7 +288,7 @@
                     </button>
 
                     <button type="submit" [disabled]="savingSchedule()"
-                        class="rounded-lg bg-teal-800 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:opacity-60">
+                        class="rounded-lg bg-teal-600 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-60">
                         {{ savingSchedule()
                         ? 'Saving...'
                         : editingScheduleId()
