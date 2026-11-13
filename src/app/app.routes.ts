@@ -100,8 +100,24 @@ export const routes: Routes = [
                                 .then(m => m.AppointmentDetails)
                     }
                 ]
+            },
+            {
+                path: 'calls',
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () =>
+                            import('./features/calls/pages/calls-list/calls-list')
+                                .then(m => m.CallsList),
+                    },
+                    {
+                        path: ':id',
+                        loadComponent: () =>
+                            import('./features/calls/pages/call-details/call-details')
+                                .then(m => m.CallDetails),
+                    },
+                ],
             }
-
         ],
     },
     {
