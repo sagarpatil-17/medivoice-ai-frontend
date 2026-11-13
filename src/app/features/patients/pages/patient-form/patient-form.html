@@ -1,0 +1,197 @@
+<div class="mx-auto max-w-4xl space-y-6">
+
+    <!-- Header -->
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900">
+                Add New Patient
+            </h1>
+            <p class="mt-1 text-sm text-slate-500">
+                Register a new patient in the hospital system.
+            </p>
+        </div>
+
+        <a routerLink="/patients" class="inline-flex items-center justify-center rounded-xl border
+             border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold
+             text-slate-600 transition hover:bg-slate-50">
+            ← Back to Patients
+        </a>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="patientForm" (ngSubmit)="submit()"
+        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <!-- Personal Information -->
+        <div class="border-b border-slate-100 p-6">
+            <h2 class="text-base font-bold text-slate-900">
+                Personal Information
+            </h2>
+            <p class="mt-1 text-sm text-slate-500">
+                Enter the patient's basic details.
+            </p>
+
+            <div class="mt-6 grid gap-5 sm:grid-cols-2">
+
+                <!-- First Name -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        First Name <span class="text-red-500">*</span>
+                    </label>
+
+                    <input type="text" formControlName="firstName" placeholder="Enter first name" class="w-full rounded-xl border border-slate-200 px-4 py-3
+                   text-sm outline-none transition focus:border-teal-600
+                   focus:ring-2 focus:ring-teal-100" />
+
+                    @if (f.firstName.touched && f.firstName.invalid) {
+                    <p class="mt-1 text-xs text-red-600">
+                        First name is required and must contain at least 2 characters.
+                    </p>
+                    }
+                </div>
+
+                <!-- Last Name -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Last Name <span class="text-red-500">*</span>
+                    </label>
+
+                    <input type="text" formControlName="lastName" placeholder="Enter last name" class="w-full rounded-xl border border-slate-200 px-4 py-3
+                   text-sm outline-none transition focus:border-teal-600
+                   focus:ring-2 focus:ring-teal-100" />
+
+                    @if (f.lastName.touched && f.lastName.invalid) {
+                    <p class="mt-1 text-xs text-red-600">
+                        Last name is required and must contain at least 2 characters.
+                    </p>
+                    }
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Phone Number <span class="text-red-500">*</span>
+                    </label>
+
+                    <input type="tel" formControlName="phone" placeholder="+919876543210" class="w-full rounded-xl border border-slate-200 px-4 py-3
+                   text-sm outline-none transition focus:border-teal-600
+                   focus:ring-2 focus:ring-teal-100" />
+
+                    @if (f.phone.touched && f.phone.invalid) {
+                    <p class="mt-1 text-xs text-red-600">
+                        Enter a valid phone number with country code, e.g. +919876543210.
+                    </p>
+                    }
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Email Address
+                    </label>
+
+                    <input type="email" formControlName="email" placeholder="patient@example.com" class="w-full rounded-xl border border-slate-200 px-4 py-3
+                   text-sm outline-none transition focus:border-teal-600
+                   focus:ring-2 focus:ring-teal-100" />
+
+                    @if (f.email.touched && f.email.invalid) {
+                    <p class="mt-1 text-xs text-red-600">
+                        Enter a valid email address.
+                    </p>
+                    }
+                </div>
+
+                <!-- Date of Birth -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Date of Birth
+                    </label>
+
+                    <input type="date" formControlName="dateOfBirth" [max]="today" class="w-full rounded-xl border border-slate-200 px-4 py-3
+                   text-sm outline-none transition focus:border-teal-600
+                   focus:ring-2 focus:ring-teal-100" />
+                </div>
+
+                <!-- Gender -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Gender
+                    </label>
+
+                    <select formControlName="gender" class="w-full rounded-xl border border-slate-200 bg-white
+                   px-4 py-3 text-sm outline-none transition
+                   focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
+                        <option value="">Select gender</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="p-6">
+            <h2 class="text-base font-bold text-slate-900">
+                Additional Information
+            </h2>
+            <p class="mt-1 text-sm text-slate-500">
+                Optional patient information.
+            </p>
+
+            <div class="mt-6 space-y-5">
+
+                <!-- Address -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Address
+                    </label>
+
+                    <textarea rows="3" formControlName="address" placeholder="Enter patient's address" class="w-full resize-none rounded-xl border border-slate-200
+                   px-4 py-3 text-sm outline-none transition
+                   focus:border-teal-600 focus:ring-2 focus:ring-teal-100"></textarea>
+                </div>
+
+                <!-- Notes -->
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                        Medical / Registration Notes
+                    </label>
+
+                    <textarea rows="3" formControlName="notes" placeholder="Enter any relevant notes" class="w-full resize-none rounded-xl border border-slate-200
+                   px-4 py-3 text-sm outline-none transition
+                   focus:border-teal-600 focus:ring-2 focus:ring-teal-100"></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Error -->
+        @if (errorMessage()) {
+        <div class="mx-6 mb-4 rounded-xl border border-red-200
+                  bg-red-50 px-4 py-3 text-sm text-red-700">
+            {{ errorMessage() }}
+        </div>
+        }
+
+        <!-- Actions -->
+        <div class="flex flex-col-reverse justify-end gap-3 border-t
+                border-slate-100 bg-slate-50 px-6 py-5 sm:flex-row">
+
+            <a routerLink="/patients" class="rounded-xl border border-slate-200 bg-white px-5 py-3
+               text-center text-sm font-semibold text-slate-600
+               hover:bg-slate-100">
+                Cancel
+            </a>
+
+            <button type="submit" [disabled]="loading()" class="rounded-xl bg-teal-800 px-6 py-3 text-sm font-semibold
+               text-white transition hover:bg-teal-900
+               disabled:cursor-not-allowed disabled:opacity-60">
+                {{ loading() ? 'Saving Patient...' : 'Save Patient' }}
+            </button>
+
+        </div>
+
+    </form>
+</div>
