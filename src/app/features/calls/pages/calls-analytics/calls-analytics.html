@@ -18,7 +18,7 @@
             </a>
 
             <button type="button" (click)="loadAnalytics()" [disabled]="loading()"
-                class="px-4 py-2.5 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 disabled:opacity-50">
+                class="px-4 py-2.5 rounded-xl bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 disabled:opacity-50">
                 Refresh
             </button>
         </div>
@@ -62,8 +62,7 @@
                         {{ data.totalCalls }}
                     </h2>
                 </div>
-                <div
-                    class="w-11 h-11 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center text-xl">
+                <div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-xl">
                     <span>☎</span>
                 </div>
             </div>
@@ -247,7 +246,7 @@
                         </span>
                     </div>
                     <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-violet-500 rounded-full" [style.width.%]="successRate()"></div>
+                        <div class="h-full bg-teal-500 rounded-full" [style.width.%]="successRate()"></div>
                     </div>
                 </div>
 
@@ -291,7 +290,7 @@
             Analytics are based on call records received from Vapi.
         </p>
 
-        <a routerLink="/calls" class="text-sm font-semibold text-violet-600 hover:text-violet-700">
+        <a routerLink="/calls" class="text-sm font-semibold text-teal-600 hover:text-teal-700">
             Explore call history →
         </a>
     </div>

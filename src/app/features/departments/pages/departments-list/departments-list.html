@@ -34,7 +34,7 @@
 
         <div class="rounded-2xl border border-slate-200 bg-white p-5">
             <p class="text-sm text-slate-500">Doctors in current page</p>
-            <p class="mt-2 text-2xl font-bold text-violet-600">
+            <p class="mt-2 text-2xl font-bold text-teal-600">
                 {{ currentPageDoctorCount() }}
             </p>
         </div>
@@ -49,7 +49,7 @@
 
             <input type="text" [value]="searchTerm()" (input)="onSearch($any($event.target).value)"
                 placeholder="Search by department name or code..."
-                class="w-full rounded-xl border border-slate-200 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100" />
+                class="w-full rounded-xl border border-slate-200 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100" />
         </div>
     </div>
 
@@ -65,7 +65,7 @@
 
         @if (loading()) {
         <div class="flex items-center justify-center py-16">
-            <div class="h-8 w-8 animate-spin rounded-full border-4 border-violet-200 border-t-violet-600"></div>
+            <div class="h-8 w-8 animate-spin rounded-full border-4 border-teal-200 border-t-teal-600"></div>
         </div>
         } @else if (departments().length === 0) {
         <div class="px-6 py-16 text-center">
@@ -130,7 +130,7 @@
                         <td class="px-6 py-4">
                             <div class="flex justify-end gap-3">
                                 <a [routerLink]="['/departments', department.id, 'edit']"
-                                    class="text-sm font-semibold text-violet-600 hover:text-violet-800">
+                                    class="text-sm font-semibold text-teal-600 hover:text-teal-800">
                                     Edit
                                 </a>
 

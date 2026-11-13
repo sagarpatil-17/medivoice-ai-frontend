@@ -120,7 +120,7 @@ export class CallsAnalytics {
             APPOINTMENT_BOOKED: 'bg-emerald-500',
             APPOINTMENT_CANCELLED: 'bg-amber-500',
             HUMAN_TRANSFER: 'bg-blue-500',
-            FAQ_RESOLVED: 'bg-violet-500',
+            FAQ_RESOLVED: 'bg-teal-500',
             UNRESOLVED: 'bg-rose-500',
             UNKNOWN: 'bg-slate-400',
         };

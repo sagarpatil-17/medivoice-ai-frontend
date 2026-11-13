@@ -77,7 +77,7 @@ export class Dashboard implements OnInit {
       value: '—',
       description: 'Currently active doctors',
       icon: '✚',
-      iconClass: 'bg-violet-50 text-violet-700',
+      iconClass: 'bg-teal-50 text-teal-700',
     },
     {
       label: 'AI voice calls',
@@ -142,7 +142,7 @@ export class Dashboard implements OnInit {
             value: overview.doctors.active.toString(),
             description: `${overview.departments.active} active departments`,
             icon: '✚',
-            iconClass: 'bg-violet-50 text-violet-700',
+            iconClass: 'bg-teal-50 text-teal-700',
           },
           {
             label: 'AI voice calls',
