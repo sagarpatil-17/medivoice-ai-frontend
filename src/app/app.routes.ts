@@ -138,18 +138,18 @@ export const routes: Routes = [
                             import('./features/departments/pages/departments-list/departments-list')
                                 .then((m) => m.DepartmentsList),
                     },
-                    // {
-                    //     path: 'new',
-                    //     loadComponent: () =>
-                    //         import('./features/departments/pages/department-form/department-form')
-                    //             .then((m) => m.DepartmentForm),
-                    // },
-                    // {
-                    //     path: ':id/edit',
-                    //     loadComponent: () =>
-                    //         import('./features/departments/pages/department-form/department-form')
-                    //             .then((m) => m.DepartmentForm),
-                    // },
+                    {
+                        path: 'new',
+                        loadComponent: () =>
+                            import('./features/departments/pages/department-form/department-form')
+                                .then((m) => m.DepartmentForm),
+                    },
+                    {
+                        path: ':id/edit',
+                        loadComponent: () =>
+                            import('./features/departments/pages/department-form/department-form')
+                                .then((m) => m.DepartmentForm),
+                    },
                 ],
             },
         ],
