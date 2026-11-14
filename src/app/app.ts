@@ -8,7 +8,7 @@ import { AuthService } from './core/auth/services/auth.service';
   templateUrl: './app.html',
 })
 export class App {
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
 
   constructor() {
     // Start restoration without blocking application rendering
