@@ -72,6 +72,11 @@ export class PatientDetails {
         this.loadAppointments(id);
     }
 
+    ngOnInit(): void {
+        const isEdit = this.route.snapshot.queryParamMap.get('edit') === 'true';
+        this.editMode.set(isEdit);
+    }
+
     loadPatient(id: string): void {
         this.loading.set(true);
         this.errorMessage.set('');
