@@ -195,4 +195,19 @@ export class AuthService {
         this.initializationSubject.next();
         this.initializationSubject.complete();
     }
+
+    googleLogin(credential: string): Observable<AuthUser> {
+        return this.http.post<LoginResponse>(
+            `${this.apiUrl}/google`,
+            { credential },
+            { withCredentials: true },
+        ).pipe(
+            tap((response) => {
+                this.accessTokenState.set(response.accessToken);
+                this.userState.set(response.user);
+                this.finishInitialization();
+            }),
+            map((response) => response.user),
+        );
+    }
 }
